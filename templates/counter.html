@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../static/counter.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Counter</title>
+</head>
+<body>
+    <h1 class="msg">Counters</h1>
+    <p class="visit-count">Visits: {{ visit_count }} time(s)</p>
+    <p class="click-count">Clicks: {{ click_count }} time(s)</p>
+    <button id="incrementButton" onclick="incrementCounter()">Click to Count!</button>
+
+    <script>
+        function incrementCounter() {
+            fetch('/increment', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.click-count').textContent = 'Clicks: ' + data.click_count + ' time(s)';
+            });
+        }
+    </script>
+</body>
+</html>
